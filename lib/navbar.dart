@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:star_flutt/contactus.dart';
+//import 'package:star_flutt/gallary.dart';
 
 class MyNavbar extends StatelessWidget {
   const MyNavbar({super.key});
@@ -34,10 +36,13 @@ class MyNavbar extends StatelessWidget {
           onTap: () => print('ViewAppointment'),
         ),
         ListTile(
-          leading: Icon(Icons.contact_emergency),
-          title: Text('ContactUs'),
-          onTap: () => print('callus'),
-        ),
+            leading: Icon(Icons.contact_emergency),
+            title: Text('ContactUs'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MyContactUs()));
+            }),
+        Divider(),
         Divider(),
         ListTile(
           leading: Icon(Icons.logout),
