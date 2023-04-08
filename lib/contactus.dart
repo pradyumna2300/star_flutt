@@ -35,6 +35,7 @@ class _MyContactUsState extends State<MyContactUs> {
     return (Scaffold(
       appBar: AppBar(
         title: Text("Contact Numbers"),
+        backgroundColor: Color.fromARGB(255, 137, 160, 225),
       ),
       drawer: MyNavbar(),
       body: SafeArea(

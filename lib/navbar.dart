@@ -5,6 +5,7 @@ import 'package:star_flutt/contactus.dart';
 import 'package:star_flutt/gallary.dart';
 import 'package:star_flutt/home.dart';
 import 'package:star_flutt/login.dart';
+import 'package:star_flutt/services.dart';
 //import 'package:star_flutt/gallary.dart';
 
 class MyNavbar extends StatelessWidget {
@@ -48,6 +49,14 @@ class MyNavbar extends StatelessWidget {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => MyContactUs()));
             }),
+        ListTile(
+          leading: Icon(Icons.view_agenda),
+          title: Text('Services'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MyServices()));
+          },
+        ),
         ListTile(
           leading: Icon(Icons.view_agenda),
           title: Text('Gallary'),
