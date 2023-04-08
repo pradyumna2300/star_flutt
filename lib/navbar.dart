@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:star_flutt/contactus.dart';
+import 'package:star_flutt/gallary.dart';
+import 'package:star_flutt/home.dart';
+import 'package:star_flutt/login.dart';
 //import 'package:star_flutt/gallary.dart';
 
 class MyNavbar extends StatelessWidget {
@@ -23,7 +26,10 @@ class MyNavbar extends StatelessWidget {
         ListTile(
           leading: Icon(Icons.home),
           title: Text('Home'),
-          onTap: () => print('home'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MyHome()));
+          },
         ),
         ListTile(
           leading: Icon(Icons.book_online),
@@ -42,12 +48,23 @@ class MyNavbar extends StatelessWidget {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => MyContactUs()));
             }),
+        ListTile(
+          leading: Icon(Icons.view_agenda),
+          title: Text('Gallary'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MyGallary()));
+          },
+        ),
         Divider(),
         Divider(),
         ListTile(
           leading: Icon(Icons.logout),
           title: Text('LogOut'),
-          onTap: () => print('ViewAppointment'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MyLogin()));
+          },
         ),
       ],
     ));

@@ -5,6 +5,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'navbar.dart';
+
 class ContactModel {
   String name, phonenumber;
   bool isSelected;
@@ -34,6 +36,7 @@ class _MyContactUsState extends State<MyContactUs> {
       appBar: AppBar(
         title: Text("Contact Numbers"),
       ),
+      drawer: MyNavbar(),
       body: SafeArea(
           child: Container(
         child: ListView.builder(
