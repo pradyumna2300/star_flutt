@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:star_flutt/booking.dart';
 import 'package:star_flutt/contactus.dart';
 import 'package:star_flutt/gallary.dart';
 import 'package:star_flutt/home.dart';
@@ -35,7 +36,10 @@ class MyNavbar extends StatelessWidget {
         ListTile(
           leading: Icon(Icons.book_online),
           title: Text('BookAppointment'),
-          onTap: () => print('bookappointment'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MyBooking()));
+          },
         ),
         ListTile(
           leading: Icon(Icons.view_agenda),

@@ -1,31 +1,33 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: avoid_unnecessary_containers
+
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import './service.dart';
 
-class MyRegister extends StatefulWidget {
-  const MyRegister({super.key});
+class MyBooking extends StatefulWidget {
+  const MyBooking({super.key});
 
   @override
-  State<MyRegister> createState() => _MyRegisterState();
+  State<MyBooking> createState() => _MyBookingState();
 }
 
-class _MyRegisterState extends State<MyRegister> {
+class _MyBookingState extends State<MyBooking> {
   TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
-
+  TextEditingController problemController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  TextEditingController timeController = TextEditingController();
+  TextEditingController genderController = TextEditingController();
   Service service = Service();
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/login.png'), fit: BoxFit.cover)),
       child: Scaffold(
           backgroundColor: Colors.transparent,
           body: Stack(
@@ -35,7 +37,7 @@ class _MyRegisterState extends State<MyRegister> {
                 padding: EdgeInsets.only(left: 35, top: 143),
                 // ignore: prefer_const_constructors
                 child: Text(
-                  'Create\n    Account',
+                  'Book Appointment',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 33,
@@ -45,7 +47,7 @@ class _MyRegisterState extends State<MyRegister> {
               Container(
                 padding: EdgeInsets.only(left: 35, top: 300),
                 child: Text(
-                  'SignUp Here',
+                  'Book Appointment',
                   style: TextStyle(
                       color: Color(0xff4c505b),
                       fontSize: 35,
@@ -87,11 +89,11 @@ class _MyRegisterState extends State<MyRegister> {
                       height: 30,
                     ),
                     TextField(
-                      controller: emailController,
+                      controller: ageController,
                       decoration: InputDecoration(
                           fillColor: Colors.grey.shade100,
                           filled: true,
-                          hintText: 'Email',
+                          hintText: 'Age',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10))),
                     ),
@@ -101,22 +103,74 @@ class _MyRegisterState extends State<MyRegister> {
                     ),
                     TextField(
                       controller: addressController,
-                      obscureText: true,
+                      // obscureText: true,
                       decoration: InputDecoration(
                           fillColor: Colors.grey.shade100,
                           filled: true,
-                          hintText: 'Set Password',
+                          hintText: 'Address',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    TextField(
+                      controller: genderController,
+                      decoration: InputDecoration(
+                          fillColor: Colors.grey.shade100,
+                          filled: true,
+                          hintText: 'Gender Male/ Female',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    TextField(
+                      controller: problemController,
+                      //obscureText: true,
+                      decoration: InputDecoration(
+                          fillColor: Colors.grey.shade100,
+                          filled: true,
+                          hintText: 'Problem',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    TextField(
+                      controller: dateController,
+                      //obscureText: true,
+                      decoration: InputDecoration(
+                          fillColor: Colors.grey.shade100,
+                          filled: true,
+                          hintText: 'Date',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    TextField(
+                      controller: timeController,
+                      //obscureText: true,
+                      decoration: InputDecoration(
+                          fillColor: Colors.grey.shade100,
+                          filled: true,
+                          hintText: 'time ',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10))),
                     ),
                     SizedBox(
                       height: 40,
                     ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'SignUP',
+                          'Book',
                           style: TextStyle(
                               color: Color(0xff4c505b),
                               fontSize: 27,
@@ -128,11 +182,21 @@ class _MyRegisterState extends State<MyRegister> {
                           child: IconButton(
                             color: Colors.white,
                             onPressed: () {
-                              service.saveUser(
-                                  nameController.text,
-                                  emailController.text,
-                                  mobileController.text,
-                                  addressController.text);
+                              service.bookPatient(
+                                addressController.text,
+                                ageController.text,
+                                dateController.text,
+                                genderController.text,
+                                mobileController.text,
+                                nameController.text,
+                                problemController.text,
+                                timeController.text,
+                                
+                                
+                                
+                                
+                                
+                              );
                             },
                             icon: Icon(Icons.arrow_forward),
                           ),
@@ -142,23 +206,6 @@ class _MyRegisterState extends State<MyRegister> {
                     SizedBox(
                       height: 40,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, 'login');
-                            },
-                            child: Text(
-                              'Sign In',
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                fontSize: 18,
-                                color: Color(0xff4c505b),
-                              ),
-                            )),
-                      ],
-                    )
                   ],
                 ),
               ))

@@ -1,8 +1,16 @@
-// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables, use_build_context_synchronously
+
+import 'dart:io';
+import 'dart:math';
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:star_flutt/home.dart';
+import './service.dart';
 
 class MyLogin extends StatefulWidget {
   const MyLogin({Key? key}) : super(key: key);
@@ -12,6 +20,11 @@ class MyLogin extends StatefulWidget {
 }
 
 class _MyLoginState extends State {
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
+  Service service = Service();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,6 +66,7 @@ class _MyLoginState extends State {
                 child: Column(
                   children: [
                     TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
                           fillColor: Colors.grey.shade100,
                           filled: true,
@@ -65,6 +79,7 @@ class _MyLoginState extends State {
                       height: 30,
                     ),
                     TextField(
+                      controller: passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                           fillColor: Colors.grey.shade100,
@@ -92,7 +107,8 @@ class _MyLoginState extends State {
                           child: IconButton(
                             color: Colors.white,
                             onPressed: () {
-                              Navigator.pushNamed(context, 'home');
+                              login();
+                              //Navigator.pushNamed(context, 'home');
                             },
                             icon: Icon(Icons.arrow_forward),
                           ),
@@ -135,5 +151,36 @@ class _MyLoginState extends State {
             ],
           )),
     );
+  }
+
+  Future<void> login() async {
+    //IMPLEMENT USER LOGIN
+    if (passwordController.text.isNotEmpty && emailController.text.isNotEmpty) {
+      Map data = {
+        'email': emailController.text,
+        'password': passwordController.text
+      };
+      Map<String, String> headers = {"Content-Type": "application/json"};
+      String body = json.encode(data);
+      var response = await http.post(
+          Uri.parse("http://restapi.adequateshop.com/api/authaccount/login"),
+          //http://restapi.adequateshop.com/api/authaccount/login
+          headers: headers,
+          body: body);
+      if (response.statusCode == 200) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MyHome()));
+      } else {
+        //Navigator.push(
+        //  context, MaterialPageRoute(builder: (context) => MyHome()));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Invalid credensial"),
+        ));
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Invalid"),
+      ));
+    }
   }
 }

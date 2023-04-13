@@ -5,6 +5,7 @@
 //import 'dart:js';
 
 import 'package:flutter/material.dart';
+import 'package:star_flutt/booking.dart';
 import 'package:star_flutt/contactus.dart';
 import 'package:star_flutt/gallary.dart';
 import 'package:star_flutt/home.dart';
@@ -24,6 +25,7 @@ void main() {
       'contact': (context) => MyContactUs(),
       'gallary': (context) => MyGallary(),
       'service': (context) => MyServices(),
+      'booking': (context) => MyBooking(),
     },
   ));
 }
