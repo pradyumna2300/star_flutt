@@ -26,6 +26,7 @@ void main() {
       'gallary': (context) => MyGallary(),
       'service': (context) => MyServices(),
       'booking': (context) => MyBooking(),
+      'pro':(context) => SettingsUI(),
     },
   ));
 }
