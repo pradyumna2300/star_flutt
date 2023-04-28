@@ -1,30 +1,74 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
+class UserProfile {
+  final String name;
+  final String email;
+  final String gender;
+  final String address;
+  final String mobile;
+  final String password;
 
-class SettingsUI extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      
-      debugShowCheckedModeBanner: false,
-      title: "Setting UI",
-      home: EditProfilePage(),
+  UserProfile({ required this.name,required this.email,required this.gender,required this.address,required this.mobile,required this.password});
+
+  factory UserProfile.fromJson(Map<String, dynamic> json) {
+    return UserProfile(
+      name: json['FullName'],
+      email: json['Email'],
+      gender: json['Gender'],
+      address: json['Address'],
+      mobile:json['Mobile'],
+      password: json['Password']
     );
   }
 }
 
-class EditProfilePage extends StatefulWidget {
-  @override
-  _EditProfilePageState createState() => _EditProfilePageState();
+
+
+
+
+class UserProfileService {
+  static const String apiUrl = 'http://192.168.43.253/Api/Profile?id=5';
+
+  static Future<UserProfile> fetchUserProfile() async {
+    final response = await http.get(Uri.parse(apiUrl));
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+       print(response.body);
+
+      final jsonBody = jsonDecode(response.body);
+      return UserProfile.fromJson(jsonBody);
+    } else {
+      throw Exception('Failed to fetch user profile');
+    }
+  }
 }
 
-class _EditProfilePageState extends State<EditProfilePage> {
+
+
+
+class UserrofilePage extends StatefulWidget {
+  @override
+  _UserrofilePageState createState() => _UserrofilePageState();
+}
+
+
+class _UserrofilePageState extends State<UserrofilePage> {
+  late Future<UserProfile> _futureUserProfile;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureUserProfile = UserProfileService.fetchUserProfile();
+  }
   bool showPassword = false;
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 1,
@@ -47,15 +91,22 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
         ],
       ),
+
       body: Container(
+
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
           },
-          child: ListView(
-            children: [
-              Text(
+
+          child: FutureBuilder<UserProfile>(
+            future:  _futureUserProfile,
+            builder: (context,snapshot) {
+              if (snapshot.hasData) {
+                return ListView(
+                  children: [
+                    Text(
                 "Edit Profile",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
               ),
@@ -110,13 +161,22 @@ class _EditProfilePageState extends State<EditProfilePage> {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Full Name", "Pradyumna kulkarni", false),
-              buildTextField("E-mail", "pradyumna@gmail.com", false),
-              buildTextField("Password", "pradyumna", true),
-              buildTextField("Address", "Aurangabad", false),
-              buildTextField("Mobile", "9999999999", false),
-              buildTextField("Dob", "23/05/2000", false),
-              SizedBox(
+                 // Text('Name: ${snapshot.data!.name}'),
+                  //Text('Email: ${snapshot.data!.email}'),
+                  //Text('Gender: ${snapshot.data!.gender}'),
+                   SizedBox(
+                height: 35,
+              ),
+              buildTextField("Full Name", '${snapshot.data!.name}', false),
+             // buildTextField("Full Name", "Pradyumna kulkarni", false),
+              buildTextField("E-mail", '${snapshot.data!.email}', false),
+              buildTextField("Gender", '${snapshot.data!.gender}', false),
+              buildTextField("Address", '${snapshot.data!.address}', false),
+              buildTextField("Mobile", '${snapshot.data!.mobile}', false),
+              buildTextField("Password", '${snapshot.data!.password}', true),
+              
+
+                  SizedBox(
                 height: 20,
               ),
               Row(
@@ -153,14 +213,31 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   )
                 ],
               )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
-  Widget buildTextField(
+
+
+                  ],
+
+                );
+              }else if (snapshot.hasError){
+                return  Text('Error: ${snapshot.error}');
+              } else {
+              return CircularProgressIndicator();
+            }
+
+            },
+          ) ,
+        
+
+      ),
+
+     
+
+    ),);
+
+}
+
+Widget buildTextField(
       String labelText, String placeholder, bool isPasswordTextField) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
@@ -185,12 +262,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
             hintStyle: TextStyle(
-              fontSize: 16,
+              fontSize: 17,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             )),
       ),
     );
   }
-}
 
+
+}

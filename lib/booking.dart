@@ -16,6 +16,9 @@ class MyBooking extends StatefulWidget {
 }
 
 class _MyBookingState extends State<MyBooking> {
+  //TextEditingController doctIdController=TextEditingController();
+  //TextEditingController patientTypeController=TextEditingController();
+  
   TextEditingController nameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   TextEditingController addressController = TextEditingController();

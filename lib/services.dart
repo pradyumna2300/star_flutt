@@ -13,7 +13,7 @@ class MyServices extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text("CheckOut Services"),
-          backgroundColor: Color.fromARGB(255, 137, 160, 225),
+          backgroundColor:Color.fromARGB(255, 3, 138, 93),
         ),
         drawer: MyNavbar(),
         body: SingleChildScrollView(

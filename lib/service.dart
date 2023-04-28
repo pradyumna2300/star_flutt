@@ -13,10 +13,10 @@ class Service {
     Map<String, String> headers = {"Content-Type": "application/json"};
     //body
     Map data = {
-      'name': '$name',
-      'email': '$email',
-      'mobile': '$mobile',
-      'address': '$address',
+      'name': name,
+      'email': email,
+      'mobile': mobile,
+      'address': address,
     };
     //convert the above data into json
     var body = json.encode(data);

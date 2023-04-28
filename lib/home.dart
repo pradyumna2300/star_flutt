@@ -18,7 +18,7 @@ class _MyHomeState extends State<MyHome> {
       drawer: MyNavbar(),
       appBar: AppBar(
         title: const Text('Clinovation'),
-        backgroundColor: Color.fromARGB(255, 137, 160, 225),
+        backgroundColor: Color.fromARGB(255, 3, 138, 93),
       ),
       body: const Center(child: Text("MainPage")),
     ));
