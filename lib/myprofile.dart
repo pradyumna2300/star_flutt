@@ -29,7 +29,7 @@ class UserProfile {
 
 
 class UserProfileService {
-  static const String apiUrl = 'http://192.168.43.253/Api/Profile?id=5';
+  static const String apiUrl = 'http://mobileapis.clinosys.com/Api/Profile?id=8';
 
   static Future<UserProfile> fetchUserProfile() async {
     final response = await http.get(Uri.parse(apiUrl));

@@ -274,7 +274,7 @@ class _MyRegisterState extends State {
       // Map<String, String> headers = {"Content-Type": "application/json"};
       // String body =json.encode(data);
 
-      var res = await http.post(Uri.parse("http://192.168.43.253/Api/Signup?strPassword=${passwordController.text}&strFullName=${nameController.text}&strAddress=${addressController.text}&dtDOB=2003-04-30T00:00:00.000Z&strGender=${genderController.text}&strMobile=${mobileController.text}&strEmail=${emailController.text}"));   
+      var res = await http.post(Uri.parse("http://mobileapis.clinosys.com/Api/Signup?strPassword=${passwordController.text}&strFullName=${nameController.text}&strAddress=${addressController.text}&dtDOB=2003-04-30T00:00:00.000Z&strGender=${genderController.text}&strMobile=${mobileController.text}&strEmail=${emailController.text}"));   
 
 
       //  var response = await http.post(

@@ -12,6 +12,7 @@ import 'package:star_flutt/bottomnavbar.dart';
 import 'package:star_flutt/pro.dart';
 import 'package:star_flutt/myprofile.dart';
 import 'package:star_flutt/doct.dart';
+import 'package:star_flutt/viewappointment.dart';
 //import 'package:star_flutt/gallary.dart';
 
 class MyNavbar extends StatelessWidget {
@@ -33,7 +34,7 @@ class MyNavbar extends StatelessWidget {
           accountEmail: const Text('user@gmail.com'),
           currentAccountPicture: CircleAvatar(
               child: ClipOval(child: Image.asset('assets/doctor.png'))),
-          decoration: BoxDecoration(color: Color.fromARGB(255, 3, 138, 93)),
+          decoration: BoxDecoration(color:  Color(0xFf7165D6)),
           
         ),
         ListTile(
@@ -63,7 +64,10 @@ class MyNavbar extends StatelessWidget {
         ListTile(
           leading: Icon(Icons.view_agenda),
           title: Text('ViewAppointment'),
-          onTap: () => print('ViewAppointment'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => ScheduleScreen()));
+          },
         ),
         ListTile(
           leading: Icon(Icons.view_agenda),

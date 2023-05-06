@@ -91,7 +91,7 @@ class _DoctListState extends State<DoctList> {
     return Expanded(
       child: ListView.builder(
       //itemCount: apiList!.length,
-      itemCount: 7,
+      itemCount: 10,
       itemBuilder: (BuildContext context,int index){
         return Container(
 
@@ -182,7 +182,7 @@ class _DoctListState extends State<DoctList> {
   }
 
   Future<void> getApiData() async{
-    String url="http://192.168.43.253/Api/DoctorInfo?id=112320";
+    String url="http://mobileapis.clinosys.com/Api/DoctorInfo?id=112320";
     var result= await http.get(Uri.parse(url));
     print(result.statusCode);
     print(result.body);

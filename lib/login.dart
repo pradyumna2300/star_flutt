@@ -128,6 +128,7 @@ class _MyLoginState extends State {
                                   onPressed: () {
                                     if(_formKey.currentState!.validate()){
                                     login();
+                                   // Navigator.pushNamed(context, 'home');
 
                                     }
                                     //Navigator.pushNamed(context, 'home');
@@ -179,6 +180,9 @@ class _MyLoginState extends State {
   }
 
   Future<void> login() async {
+    //var id;
+    
+
     //IMPLEMENT USER LOGIN
     // if (passwordController.text.isNotEmpty && emailController.text.isNotEmpty) {
       // Map data = {
@@ -188,7 +192,7 @@ class _MyLoginState extends State {
       // Map<String, String> headers = {"Content-Type": "application/json"};
       // String body =json.encode(data);
 
-      var res = await http.post(Uri.parse("http://192.168.43.253/api/Login?strEmail=${emailController.text}&strPassword=${passwordController.text}"));   
+      var res = await http.post(Uri.parse("http://mobileapis.clinosys.com/api/Login?strEmail=${emailController.text}&strPassword=${passwordController.text}"));   
 
 
       //  var response = await http.post(
@@ -200,12 +204,19 @@ class _MyLoginState extends State {
           print(res.statusCode);
       if (res.statusCode == 200) {
         print(res.body);
+        var userId = res.body;
+        
+        
+        //print(res.id);
         String msg = jsonDecode(res.body);
         print(jsonDecode(res.body));
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(res.body),
+         
         ));
+        //msg=="Login Successful"res.statusCode == 200
         if(msg=="Login Successful"){
+          
            Navigator.push(
             context, MaterialPageRoute(builder: (context) => MyBottomBar()));
 

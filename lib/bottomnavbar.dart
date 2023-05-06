@@ -35,7 +35,7 @@ class _MyBottomBarState extends State<MyBottomBar> {
 
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor:Color.fromARGB(255, 3, 138, 93),
+        backgroundColor:Color(0xFf7165D6),
          selectedFontSize:18.0,
    unselectedFontSize : 12.0,
         onTap: onTap,
