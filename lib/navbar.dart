@@ -7,6 +7,7 @@ import 'package:star_flutt/doctorslist.dart';
 import 'package:star_flutt/gallary.dart';
 import 'package:star_flutt/home.dart';
 import 'package:star_flutt/login.dart';
+import 'package:star_flutt/reports.dart';
 import 'package:star_flutt/services.dart';
 import 'package:star_flutt/bottomnavbar.dart';
 import 'package:star_flutt/pro.dart';
@@ -27,7 +28,7 @@ class MyNavbar extends StatelessWidget {
         UserAccountsDrawerHeader(
           onDetailsPressed: () => {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => UserrofilePage()))
+                context, MaterialPageRoute(builder: (context) => SettingsUI()))//UserrofilePage()))
             
           },
           accountName: const Text('UserName'),
@@ -67,6 +68,14 @@ class MyNavbar extends StatelessWidget {
           onTap: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => ScheduleScreen()));
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.view_agenda),
+          title: Text('Reports'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MyReports()));
           },
         ),
         ListTile(

@@ -127,8 +127,8 @@ class _MyLoginState extends State {
                                   color: Colors.white,
                                   onPressed: () {
                                     if(_formKey.currentState!.validate()){
-                                    login();
-                                   // Navigator.pushNamed(context, 'home');
+                                    //login();
+                                    Navigator.pushNamed(context, 'home');
 
                                     }
                                     //Navigator.pushNamed(context, 'home');
