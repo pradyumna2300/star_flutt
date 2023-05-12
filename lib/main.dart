@@ -1,5 +1,7 @@
 
 
+//import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:star_flutt/booking.dart';
 import 'package:star_flutt/contactus.dart';
@@ -24,12 +26,14 @@ import 'package:star_flutt/myappointmentdetails.dart';
 import 'package:star_flutt/prescriptionlist.dart';
 import 'package:star_flutt/t.dart';
 import 'package:star_flutt/visitlistforprescription.dart';
+import 'package:star_flutt/visitlistradiology.dart';
+import 'package:star_flutt/radiologyreportslist.dart';
 
 void main() {
   runApp(MaterialApp(
     //home: MyBottomBar(),
     debugShowCheckedModeBanner: false,
-   initialRoute: 'home',
+   initialRoute: 'visitlistradiology',
     routes: {
       'logint': (context) => Login(),
       'login': (context) => MyLogin(),
@@ -51,7 +55,9 @@ void main() {
       'reports':(context) =>   MyReports(),
       't':(context) => MyPatho(),
       'prescriptionlist':(context) => MyPrescriptionList(),
-      'visitlistforprescription':(context) => MyVisitListPrescription()
+      'visitlistforprescription':(context) => MyVisitListPrescription(),
+      'visitlistradiology':(context) => MyVisitListRadiology(),
+      'radiologyreportslist':(context) => MyRadiologyReportList()
     },
   ));
 }
