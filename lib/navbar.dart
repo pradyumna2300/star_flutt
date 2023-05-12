@@ -15,6 +15,7 @@ import 'package:star_flutt/myprofile.dart';
 import 'package:star_flutt/doct.dart';
 import 'package:star_flutt/viewappointment.dart';
 //import 'package:star_flutt/gallary.dart';
+import 'package:star_flutt/visitlistforprescription.dart';
 
 class MyNavbar extends StatelessWidget {
   const MyNavbar({super.key});
@@ -76,6 +77,14 @@ class MyNavbar extends StatelessWidget {
           onTap: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => MyReports()));
+          },
+        ),//MyVisitListPrescription
+        ListTile(
+          leading: Icon(Icons.view_agenda),
+          title: Text('Prescription'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MyVisitListPrescription()));
           },
         ),
         ListTile(

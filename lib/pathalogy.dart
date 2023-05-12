@@ -87,7 +87,7 @@ class _MyPathoState extends State<MyPatho> {
                   children: [
                      const SizedBox(height: 40),
                     Text(
-                      '${apiList![index].testName}',//'${apiList![index].name}'cbc
+                      '${apiList![index].testName}',//cbc
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Color.fromARGB(255, 106, 53, 7)),
                     ),const SizedBox(height: 19),
@@ -156,7 +156,7 @@ class _MyPathoState extends State<MyPatho> {
   }
   
   Future<void> getApiData() async{
-    String url="http://mobileapis.clinosys.com/api/Pathology?opdIpdId=73187";
+    String url="http://mobileapis.clinosys.com/api/Pathology?opdIpdId=73187&opIpType=0";
     var result= await http.get(Uri.parse(url));
     print(result.statusCode);
     print(result.body);

@@ -247,6 +247,35 @@ class _MyPrescriptState extends State<MyPrescript> {
                   ],
                 ),
                 Divider(
+                  height: 18,
+                  thickness: 2,
+                  color: Colors.black,
+                ),
+                Text("Patient Name :"+" Pradyumna Kulkarni",//PatientNamee
+                style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Color.fromARGB(255, 106, 53, 7)),
+                    ),
+                    
+                ListTile(
+                  title: Text("RegNo :"+" 123",style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 106, 53, 7)
+                    ),),//RegNo
+                  subtitle:Text("Age :"+" 25",style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 106, 53, 7)
+                    ),), 
+                  trailing: Text("Gender :"+"Male",style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 106, 53, 7)
+                    ),),
+                ),
+               
+                
+                Divider(
                   height: 15,
                   thickness: 1,
                   color: Colors.black,
@@ -290,20 +319,20 @@ class _MyPrescriptState extends State<MyPrescript> {
                 child: ListView.builder(
                    shrinkWrap: true,
                     physics: ClampingScrollPhysics(),
-                  itemCount: 1,
+                  itemCount: 6,
                   itemBuilder: (BuildContext context, int index){
                     return  Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ListTile(
                             
-                          title: Text('AZHITHROMICIN',//apiList![index].updatedDateTime
+                          title: Text('AZHITHROMICIN',//apiList![index].drugName
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                           ),
-                          subtitle: Text("1-0-1"),//"${apiList![index].opdIpdIp}"),
-                          trailing: Text("2days "),
+                          subtitle: Text("1-0-1"),//"${apiList![index].doseName}"),
+                          trailing: Text("2days "),//"${apiList![index].duration}+${apiList![index].durationIn
                           
                           ),
                           // Padding(padding: EdgeInsets.symmetric(horizontal: 15)

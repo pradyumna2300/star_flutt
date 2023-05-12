@@ -21,13 +21,15 @@ import 'package:star_flutt/myprofile.dart';
 import 'package:star_flutt/reports.dart';
 import 'package:star_flutt/viewappointment.dart';
 import 'package:star_flutt/myappointmentdetails.dart';
+import 'package:star_flutt/prescriptionlist.dart';
 import 'package:star_flutt/t.dart';
+import 'package:star_flutt/visitlistforprescription.dart';
 
 void main() {
   runApp(MaterialApp(
     //home: MyBottomBar(),
     debugShowCheckedModeBanner: false,
-   initialRoute: 'login',
+   initialRoute: 'home',
     routes: {
       'logint': (context) => Login(),
       'login': (context) => MyLogin(),
@@ -47,7 +49,9 @@ void main() {
       //'pathalogy':(context)=>MyPatho(),
       'reportpathology':(context) => MyReportPatho(),
       'reports':(context) =>   MyReports(),
-      't':(context) => MyPatho()
+      't':(context) => MyPatho(),
+      'prescriptionlist':(context) => MyPrescriptionList(),
+      'visitlistforprescription':(context) => MyVisitListPrescription()
     },
   ));
 }
