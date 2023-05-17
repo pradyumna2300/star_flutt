@@ -3,13 +3,16 @@
 //import 'dart:js';
 
 import 'package:flutter/material.dart';
+import 'package:star_flutt/admissionform.dart';
 import 'package:star_flutt/booking.dart';
 import 'package:star_flutt/contactus.dart';
+import 'package:star_flutt/dischargesummery.dart';
 import 'package:star_flutt/doct.dart';
 import 'package:star_flutt/gallary.dart';
 import 'package:star_flutt/home.dart';
 import 'package:star_flutt/login.dart';
 import 'package:star_flutt/logint.dart';
+import 'package:star_flutt/otnotes.dart';
 //import 'package:star_flutt/pathalogy.dart';
 import 'package:star_flutt/prescription.dart';
 import 'package:star_flutt/register.dart';
@@ -25,15 +28,20 @@ import 'package:star_flutt/viewappointment.dart';
 import 'package:star_flutt/myappointmentdetails.dart';
 import 'package:star_flutt/prescriptionlist.dart';
 import 'package:star_flutt/t.dart';
+import 'package:star_flutt/visitlistdischargesummery.dart';
 import 'package:star_flutt/visitlistforprescription.dart';
+import 'package:star_flutt/visitlistotnotes.dart';
 import 'package:star_flutt/visitlistradiology.dart';
 import 'package:star_flutt/radiologyreportslist.dart';
+import 'package:star_flutt/visitlistcasepaper.dart';
+import 'package:star_flutt/casepaper.dart';
+import 'package:star_flutt/check.dart';
 
 void main() {
   runApp(MaterialApp(
     //home: MyBottomBar(),
     debugShowCheckedModeBanner: false,
-   initialRoute: 'visitlistradiology',
+   initialRoute: 'visitlistotnotes',
     routes: {
       'logint': (context) => Login(),
       'login': (context) => MyLogin(),
@@ -57,7 +65,15 @@ void main() {
       'prescriptionlist':(context) => MyPrescriptionList(),
       'visitlistforprescription':(context) => MyVisitListPrescription(),
       'visitlistradiology':(context) => MyVisitListRadiology(),
-      'radiologyreportslist':(context) => MyRadiologyReportList()
+      'radiologyreportslist':(context) => MyRadiologyReportList(),
+      'visitlistcasepaper':(context) => MyVisitListCasePaper(),
+      'otnotes':(context) => MyOtNotes(),
+      'casepaper':(context) =>MyCasePaper(),
+      'visitlistdischargesummery':(context) => MyVisitListDischargeSummery(),
+      'dischargesummery':(context) => MyDischarge(),
+      'admissionform':(context) => MyAdmission(),
+      'check':(context) => MyCheck(),
+      'visitlistotnotes':(context) => MyVisitlistOtNotes()
     },
   ));
 }
