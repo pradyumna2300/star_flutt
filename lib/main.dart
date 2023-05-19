@@ -4,6 +4,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:star_flutt/admissionform.dart';
+import 'package:star_flutt/bills/bill.dart';
+import 'package:star_flutt/bills/opd/opdbill.dart';
+import 'package:star_flutt/bills/opd/opdbilllist.dart';
+import 'package:star_flutt/bills/opd/visitlistopdbill.dart';
+import 'package:star_flutt/bills/visitlistbills.dart';
 import 'package:star_flutt/booking.dart';
 import 'package:star_flutt/contactus.dart';
 import 'package:star_flutt/dischargesummery.dart';
@@ -28,6 +33,7 @@ import 'package:star_flutt/viewappointment.dart';
 import 'package:star_flutt/myappointmentdetails.dart';
 import 'package:star_flutt/prescriptionlist.dart';
 import 'package:star_flutt/t.dart';
+import 'package:star_flutt/visitlistadmission.dart';
 import 'package:star_flutt/visitlistdischargesummery.dart';
 import 'package:star_flutt/visitlistforprescription.dart';
 import 'package:star_flutt/visitlistotnotes.dart';
@@ -36,12 +42,13 @@ import 'package:star_flutt/radiologyreportslist.dart';
 import 'package:star_flutt/visitlistcasepaper.dart';
 import 'package:star_flutt/casepaper.dart';
 import 'package:star_flutt/check.dart';
+import 'package:star_flutt/bills/billlist.dart';
 
 void main() {
   runApp(MaterialApp(
     //home: MyBottomBar(),
     debugShowCheckedModeBanner: false,
-   initialRoute: 'visitlistotnotes',
+   initialRoute: 'visitlistopdbill',
     routes: {
       'logint': (context) => Login(),
       'login': (context) => MyLogin(),
@@ -73,7 +80,14 @@ void main() {
       'dischargesummery':(context) => MyDischarge(),
       'admissionform':(context) => MyAdmission(),
       'check':(context) => MyCheck(),
-      'visitlistotnotes':(context) => MyVisitlistOtNotes()
+      'visitlistotnotes':(context) => MyVisitlistOtNotes(),
+      'visitlistadmission':(context) => MyVisitlistAdmission(),
+      'visitlistbills':(context) => MyVisitlistBill(),
+      'billlist':(context) => MyBillList(),
+      'bill':(context) => MyBill(),
+      'opdbill':(context) => MyOpdBill(),
+      'visitlistopdbill':(context) => MyVisitlistOpdBill(),
+      'opdbilllist':(context) => MyOpdBillList(),
     },
   ));
 }
