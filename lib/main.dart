@@ -48,7 +48,7 @@ void main() {
   runApp(MaterialApp(
     //home: MyBottomBar(),
     debugShowCheckedModeBanner: false,
-   initialRoute: 'visitlistdischargesummery',
+   initialRoute: 'home',
     routes: {
       'logint': (context) => Login(),
       'login': (context) => MyLogin(),
