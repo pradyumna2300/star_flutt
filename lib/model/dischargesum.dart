@@ -66,6 +66,7 @@ class Dischargesum {
     dynamic dischargedDocId;
     int? docNameId;
     int? dischargeSummaryId1;
+    String remark;
 
     Dischargesum({
       
@@ -125,6 +126,7 @@ class Dischargesum {
         this.dischargedDocId,
         this.docNameId,
         this.dischargeSummaryId1,
+        required this.remark
     });
 
     factory Dischargesum.fromJson(Map<String, dynamic> json) => Dischargesum(
@@ -185,6 +187,7 @@ class Dischargesum {
         dischargedDocId: json["DischargedDocId"],
         docNameId: json["DocNameID"],
         dischargeSummaryId1: json["DischargeSummaryId1"],
+         remark: json["Remark"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -245,6 +248,7 @@ class Dischargesum {
         "DischargedDocId": dischargedDocId,
         "DocNameID": docNameId,
         "DischargeSummaryId1": dischargeSummaryId1,
+         "Remark": remark,
     };
 }
 // To parse this JSON data, do
@@ -258,37 +262,37 @@ List<Course> courseFromJson(String str) => List<Course>.from(json.decode(str).ma
 String courseToJson(List<Course> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Course {
-    int dischargeSummaryId;
-    String drugName;
+    //int dischargeSummaryId;
+   // String drugName;
     String doseName;
-    int qty;
-    String instruction;
-    String durationIn;
+   // int qty;
+   // String instruction;
+    //String durationIn;
 
     Course({
-        required this.dischargeSummaryId,
-        required this.drugName,
+      //  required this.dischargeSummaryId,
+      //  required this.drugName,
         required this.doseName,
-        required this.qty,
-        required this.instruction,
-        required this.durationIn,
+      //  required this.qty,
+      //  required this.instruction,
+      //  required this.durationIn,
     });
 
     factory Course.fromJson(Map<String, dynamic> json) => Course(
-        dischargeSummaryId: json["DischargeSummaryId"],
-        drugName: json["DrugName"],
+      //  dischargeSummaryId: json["DischargeSummaryId"],
+      //  drugName: json["DrugName"],
         doseName: json["DoseName"],
-        qty: json["Qty"],
-        instruction: json["Instruction"],
-        durationIn: json["DurationIn"],
+       // qty: json["Qty"],
+        //instruction: json["Instruction"],
+        //durationIn: json["DurationIn"],
     );
 
     Map<String, dynamic> toJson() => {
-        "DischargeSummaryId": dischargeSummaryId,
-        "DrugName": drugName,
+        //"DischargeSummaryId": dischargeSummaryId,
+        //"DrugName": drugName,
         "DoseName": doseName,
-        "Qty": qty,
-        "Instruction": instruction,
-        "DurationIn": durationIn,
+        //"Qty": qty,
+        //"Instruction": instruction,
+        //"DurationIn": durationIn,
     };
 }

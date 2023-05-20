@@ -28,14 +28,14 @@ class _MyDischargeState extends State<MyDischarge> {
     // TODO: implement initState
     super.initState();
     getApiData();
-    //getCourseApiData();
+   // getCourseApiData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Discharge Summery"),
+        title: Text("Discharge"),
         backgroundColor: Color.fromARGB(255, 5, 117, 134),
       ),
       body: Container(
@@ -342,7 +342,7 @@ class _MyDischargeState extends State<MyDischarge> {
                                                 fontSize: 15),
                                           ),
                                           Text(
-                                            "Dose :" ,//+ "${apiList?[index].doseName}",
+                                            "Dose :", //+ "${apiLista?[index].doseName}",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 15),
@@ -373,44 +373,7 @@ class _MyDischargeState extends State<MyDischarge> {
                               })),
                     ),
                    
-                    /*
-                    ListTile(
-                                      contentPadding:
-                                          EdgeInsets.only(top: 10, left: 10),
-                                      title: Text(
-                                        //'AZHITHROMICIN', //
-                                        
-                                        "${apiLista![index].drugName}",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      subtitle: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Dose :" + 
-                                           "${apiLista![index].doseName}",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15),
-                                          ),
-                                          Text(
-                                            "Instruction : " +"${apiLista![index].instruction}",
-                                               // "${apiLista?[index].instruction} ",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15),
-                                          )
-                                        ],
-                                      ),
-                                      //Text("1-0-1"),
-                                      //"${apiList![index].doseName}"),
-
-                                      trailing: Text(
-                                          "${apiLista![index].qty} "), //"${apiList![index].duration}+${apiList![index].durationIn
-                                    ),*/
+                    
                     
                     SizedBox(
                       height: 10,
@@ -561,7 +524,7 @@ class _MyDischargeState extends State<MyDischarge> {
                     Container(
                       padding: EdgeInsets.only(left: 15, top: 10),
                       child: Text(
-                        "{\\rtf1\\ansi\\ansicpg1252\\uc1\\htmautsp\\deff2{\\fonttbl{\\f0\\fcharset0 Times New Roman;}{\\f2\\fcharset0 Segoe UI;}{\\f3\\fcharset0 cambria;}{\\f4\\fcharset0 mangal;}}{\\colortbl\\red0\\green0\\blue0;\\red255\\green255\\blue255;}\\loch\\hich\\dbch\\pard\\plain\\ltrpar\\itap0{\\lang1033\\fs18\\f2\\cf0 \\cf0\\ql{\\fs20\\f3 \\ql{\\f4 {\\ltrch \⌥?\⍐?\⍨? \⍐?\⍠?\⍦?\⍔?\⍵?\⍂?\⍦?\⍒? \⌐?\⍡?\⍦?\⍒? \⌨?\⎁?\⍑?\⍦? }\\li0\\ri0\\sa0\\sb0\\fi0\\ql\\par}\r\n}\r\n}\r\n}",
+                        "${apiList![index].remark}",
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
@@ -626,22 +589,22 @@ class _MyDischargeState extends State<MyDischarge> {
   Future<void> getApiData() async {
     String url =
         "http://mobileapis.clinosys.com/api/DischSumm?admId=20342";
-     String urla =
-        "http://mobileapis.clinosys.com/api/TreatGiven?dischSummId=10328";    
+     //String urla =
+     //   "http://mobileapis.clinosys.com/api/TreatGiven?dischSummId=10328";    
     var result = await http.get(Uri.parse(url));
-    var resulta = await http.get(Uri.parse(urla));
+    //var resulta = await http.get(Uri.parse(urla));
     print(result.statusCode);
     print(result.body);
-    print(resulta.statusCode);
-    print(resulta.body);
+    //print(resulta.statusCode);
+    //print(resulta.body);
     apiList=jsonDecode(result.body).map((item) => Dischargesum.fromJson(item)).toList().cast<Dischargesum>();
-    apiLista=jsonDecode(result.body).map((item) => Course.fromJson(item)).toList().cast<Course>();
+    //apiLista=jsonDecode(result.body).map((item) => Course.fromJson(item)).toList().cast<Course>();
     //apiList = jsonDecode(result.body)
       //  .map((item) => Dischargesum.fromJson(item))
         //.toList()
         //.cast<Dischargesum>();
   }
-  /*
+  
   Future<void> getCourseApiData() async {
     String url =
         "http://mobileapis.clinosys.com/api/TreatGiven?dischSummId=10328";
@@ -654,5 +617,5 @@ class _MyDischargeState extends State<MyDischarge> {
       //  .map((item) => Dischargesum.fromJson(item))
         //.toList()
         //.cast<Dischargesum>();
-  }*/
+  }
 }
