@@ -77,7 +77,7 @@ void main() {
       'otnotes':(context) => MyOtNotes(),
       'casepaper':(context) =>MyCasePaper(),
       'visitlistdischargesummery':(context) => MyVisitListDischargeSummery(),
-      'dischargesummery':(context) => MyDischarge(),
+     // 'dischargesummery':(context) => MyDischarge(id: ,),
       'admissionform':(context) => MyAdmission(),
       'check':(context) => MyCheck(),
       'visitlistotnotes':(context) => MyVisitlistOtNotes(),
@@ -85,9 +85,9 @@ void main() {
       'visitlistbills':(context) => MyVisitlistBill(),
       'billlist':(context) => MyBillList(),
       'bill':(context) => MyBill(),
-      'opdbill':(context) => MyOpdBill(),
+      //'opdbill':(context) => MyOpdBill(),
       'visitlistopdbill':(context) => MyVisitlistOpdBill(),
-      'opdbilllist':(context) => MyOpdBillList(),
+      //'opdbilllist':(context) => MyOpdBillList(),
     },
   ));
 }

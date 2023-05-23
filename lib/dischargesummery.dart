@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_string_interpolations
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -14,7 +15,8 @@ import 'package:star_flutt/model/dischargesum.dart';
 
 
 class MyDischarge extends StatefulWidget {
-  const MyDischarge({super.key});
+  final String id;
+  const MyDischarge({super.key,required this.id});
 
   @override
   State<MyDischarge> createState() => _MyDischargeState();
@@ -23,6 +25,7 @@ class MyDischarge extends StatefulWidget {
 class _MyDischargeState extends State<MyDischarge> {
   List<Dischargesum>? apiList;
   List<Course>? apiLista;
+  bool isLoading = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -38,7 +41,11 @@ class _MyDischargeState extends State<MyDischarge> {
         title: Text("Discharge"),
         backgroundColor: Color.fromARGB(255, 5, 117, 134),
       ),
-      body: Container(
+      body:  isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+      :Container(
         child: ListView.builder(
           physics: ClampingScrollPhysics(),
           itemCount: 1,//apiList!.length,
@@ -130,7 +137,8 @@ class _MyDischargeState extends State<MyDischarge> {
                   padding: EdgeInsets.only(top: 5, left: 1, right: 82),
                   child: Text(
                     " Date Of Discharge : " +
-                         "${apiList![index].dischargeDate}",// +
+                         "${apiList![index].dischargeDate.toString()
+                                     .split(" ")[0]}",// +
                        // " 6:00 PM", //PatientNamee
                     style: TextStyle(
                         fontSize: 15,
@@ -588,7 +596,7 @@ class _MyDischargeState extends State<MyDischarge> {
 
   Future<void> getApiData() async {
     String url =
-        "http://mobileapis.clinosys.com/api/DischSumm?admId=20342";
+        "http://mobileapis.clinosys.com/api/DischSumm?admId=${widget.id}";//20342
      //String urla =
      //   "http://mobileapis.clinosys.com/api/TreatGiven?dischSummId=10328";    
     var result = await http.get(Uri.parse(url));
@@ -597,7 +605,14 @@ class _MyDischargeState extends State<MyDischarge> {
     print(result.body);
     //print(resulta.statusCode);
     //print(resulta.body);
-    apiList=jsonDecode(result.body).map((item) => Dischargesum.fromJson(item)).toList().cast<Dischargesum>();
+    if (result.statusCode == 200) {
+      setState(() {
+        isLoading = false;
+      });
+      log(result.body);
+      apiList=jsonDecode(result.body).map((item) => Dischargesum.fromJson(item)).toList().cast<Dischargesum>();
+    
+    }
     //apiLista=jsonDecode(result.body).map((item) => Course.fromJson(item)).toList().cast<Course>();
     //apiList = jsonDecode(result.body)
       //  .map((item) => Dischargesum.fromJson(item))

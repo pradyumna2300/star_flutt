@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unnecessary_string_interpolations
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -33,7 +35,8 @@ class Billlistopdmodel {
 
 
 class MyOpdBillList extends StatefulWidget {
-  const MyOpdBillList({super.key});
+   final String id;
+  const MyOpdBillList({super.key,required this.id});
 
   @override
   State<MyOpdBillList> createState() => _MyOpdBillListState();
@@ -41,6 +44,8 @@ class MyOpdBillList extends StatefulWidget {
 
 class _MyOpdBillListState extends State<MyOpdBillList> {
   List<Billlistopdmodel>? apiList;
+  bool isLoading = true;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -52,7 +57,11 @@ class _MyOpdBillListState extends State<MyOpdBillList> {
     return Container(
       color: Colors.white,
       
-      child: ListView.builder(
+      child:  isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+            : ListView.builder(
         itemCount:apiList!.length,
         itemBuilder:(BuildContext context, int index){
           return Container(
@@ -70,8 +79,17 @@ class _MyOpdBillListState extends State<MyOpdBillList> {
                 containedInkWell: true,
                 highlightShape: BoxShape.rectangle,
                 onTap: () => {
-                   Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MyOpdBill()))
+                                                Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      MyOpdBill(
+                                                        id: apiList![index]
+                                                            .billNo
+                                                            .toString(),
+                                                      )))
+                  // Navigator.push(
+           // context, MaterialPageRoute(builder: (context) => MyOpdBill()))
                   
                 },
                 child: Column(
@@ -148,10 +166,18 @@ class _MyOpdBillListState extends State<MyOpdBillList> {
   }
   
   Future<void> getApiData() async{
-    String url="http://mobileapis.clinosys.com/api/Bill?opdIpdId=1&opIpType=0";
+    String url="http://mobileapis.clinosys.com/api/Bill?opdIpdId=${widget.id}&opIpType=0";
     var result= await http.get(Uri.parse(url));
     print(result.statusCode);
     print(result.body);
-    apiList=jsonDecode(result.body).map((item) =>  Billlistopdmodel.fromJson(item)).toList().cast<Billlistopdmodel>();
+     if (result.statusCode == 200) {
+      setState(() {
+        isLoading = false;
+      });
+      log(result.body);
+      apiList=jsonDecode(result.body).map((item) =>  Billlistopdmodel.fromJson(item)).toList().cast<Billlistopdmodel>();
+ 
+    }
+   // apiList=jsonDecode(result.body).map((item) =>  Billlistopdmodel.fromJson(item)).toList().cast<Billlistopdmodel>();
   }
 }

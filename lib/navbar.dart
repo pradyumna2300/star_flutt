@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:star_flutt/bills/opd/visitlistopdbill.dart';
 import 'package:star_flutt/booking.dart';
 import 'package:star_flutt/contactus.dart';
 import 'package:star_flutt/doctorslist.dart';
@@ -14,8 +15,12 @@ import 'package:star_flutt/pro.dart';
 import 'package:star_flutt/myprofile.dart';
 import 'package:star_flutt/doct.dart';
 import 'package:star_flutt/viewappointment.dart';
+import 'package:star_flutt/visitlistadmission.dart';
+import 'package:star_flutt/visitlistdischargesummery.dart';
 //import 'package:star_flutt/gallary.dart';
 import 'package:star_flutt/visitlistforprescription.dart';
+import 'package:star_flutt/visitlistotnotes.dart';
+import 'package:star_flutt/visitlistradiology.dart';
 
 class MyNavbar extends StatelessWidget {
   const MyNavbar({super.key});
@@ -89,6 +94,14 @@ class MyNavbar extends StatelessWidget {
         ),
         ListTile(
           leading: Icon(Icons.view_agenda),
+          title: Text('Radiology'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MyVisitListRadiology()));
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.view_agenda),
           title: Text('Doctors List'),
           onTap: () {Navigator.push(
                 context, MaterialPageRoute(builder: (context) => DoctList()));},
@@ -114,6 +127,46 @@ class MyNavbar extends StatelessWidget {
           onTap: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => MyGallary()));
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.view_agenda),
+          title: Text('OTnotes'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MyVisitlistOtNotes()));
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.view_agenda),
+          title: Text('Gallary'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MyGallary()));
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.view_agenda),
+          title: Text('Admission Form'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MyVisitlistAdmission()));
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.view_agenda),
+          title: Text('Dischargesummery'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MyVisitListDischargeSummery()));
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.view_agenda),
+          title: Text('OPD BILL'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MyVisitlistOpdBill()));
           },
         ),
         Divider(),

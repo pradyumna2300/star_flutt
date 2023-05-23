@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -69,6 +71,7 @@ class MyVisitListDischargeSummery extends StatefulWidget {
 
 class _MyVisitListDischargeSummeryState extends State<MyVisitListDischargeSummery> {
   List<Dischargesummerylist>? apiList;
+  bool isLoading = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -78,177 +81,198 @@ class _MyVisitListDischargeSummeryState extends State<MyVisitListDischargeSummer
   @override
   Widget build(BuildContext context) {
     
-    return Container(
-      color: Colors.white,
-      
-      child: ListView.builder(
-        itemCount: apiList!.length,
-        itemBuilder:(BuildContext context, int index){
-          return Container(
-            child: Column(
-              children:  <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(bottom: 20, left: 50, right: 50),
-                ),
-            Card(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              elevation: 6,
-              color: Color.fromARGB(255, 246, 245, 244),
-              semanticContainer: true,
-              child: InkResponse(
-                containedInkWell: true,
-                highlightShape: BoxShape.rectangle,
-                onTap: () => {
-                   Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MyRadiologyReportList()))
-                  
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                     const SizedBox(height: 20),
-                     ListTile(
-                      title: Text("Dr."+'${apiList![index].doctorName}',//apiList![index].updatedDateTime
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                          ),
-                          subtitle: Text('Admission ID: '+'${apiList![index].admissionId}'),
-                          trailing: CircleAvatar(
-                            radius: 25,
-                            backgroundImage: AssetImage("assets/doctor.png"),
-                          ),
-
-                     ),
-                   
-                   
-                   Divider(height: 20,thickness: 2,color: Colors.black,),
-                   Row(
+    return 
+    Scaffold(
+      appBar: AppBar(
+        title: Text("DischargeSummery"),
+        centerTitle: true,
+        backgroundColor:  Color.fromARGB(255, 5, 117, 134),
+      ),
+      body: isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+      : Container(
+        color: Colors.white,
+        
+        child: ListView.builder(
+          itemCount: apiList!.length,
+          itemBuilder:(BuildContext context, int index){
+            return Container(
+              child: Column(
+                children:  <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20, left: 50, right: 50),
+                  ),
+              Card(
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                elevation: 6,
+                color: Color.fromARGB(255, 246, 245, 244),
+                semanticContainer: true,
+                child: InkResponse(
+                  containedInkWell: true,
+                  highlightShape: BoxShape.rectangle,
+                  onTap: () => {
+                     Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MyRadiologyReportList()))
+                    
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                       const SizedBox(height: 20),
+                       ListTile(
+                        title: Text("Dr."+'${apiList![index].doctorName}',//apiList![index].updatedDateTime
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                            ),
+                            subtitle: Text('Admission ID: '+'${apiList![index].admissionId}'),
+                            trailing: CircleAvatar(
+                              radius: 25,
+                              backgroundImage: AssetImage("assets/doctor.png"),
+                            ),
+    
+                       ),
+                     
+                     
+                     Divider(height: 20,thickness: 2,color: Colors.black,),
+                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                      Text("Patient Name : "+'${apiList![index].patientName}', style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),)
+                     ],),
+                      Divider(height: 20,thickness: 1,color: Colors.black,),
+                     
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                    Text("Patient Name : "+'${apiList![index].patientName}', style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),)
-                   ],),
-                    Divider(height: 20,thickness: 1,color: Colors.black,),
-                   
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.calendar_month,
-                          color: Color.fromARGB(137, 0, 0, 0),
-                        ),
-                        SizedBox(
-                          width: 2,
-                        ),
-                        Text(
-                         //'23/05/2023' ,///
-                         '${apiList![index].admissionDate}',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(137, 4, 125, 28),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.calendar_month,
+                            color: Color.fromARGB(137, 0, 0, 0),
                           ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.access_time_filled,
-                          color: Color.fromARGB(137, 0, 0, 0),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          //"6:50 PM",
-                          '${apiList![index].admissionTime}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            color: Color.fromARGB(135, 4, 70, 39),
+                          SizedBox(
+                            width: 2,
                           ),
-                        ),
-                        SizedBox(height: 70,)
-                      ],
-                    ),
-                    Row(
-                  children: [
-                            Container(
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                color: Colors.green,
-                                shape: BoxShape.circle,
-                              ),
+                          Text(
+                           //'23/05/2023' ,///
+                           '${apiList![index].admissionDate}',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(137, 4, 125, 28),
                             ),
-                            SizedBox(width: 5,),
-                            Text(
-                              "Done",
-                              style: TextStyle(
-                                color:Colors.black54,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.access_time_filled,
+                            color: Color.fromARGB(137, 0, 0, 0),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            //"6:50 PM",
+                            '${apiList![index].admissionTime}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Color.fromARGB(135, 4, 70, 39),
+                            ),
+                          ),
+                          SizedBox(height: 70,)
+                        ],
+                      ),
+                      Row(
+                    children: [
+                              Container(
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  shape: BoxShape.circle,
+                                ),
                               ),
-                              )
-                          ],
-                ),
-                
-                  ],
-                ),
-                Row(
-                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-
+                              SizedBox(width: 5,),
+                              Text(
+                                "Done",
+                                style: TextStyle(
+                                  color:Colors.black54,
+                                ),
+                                )
+                            ],
+                  ),
                   
-                      InkWell(
-                        onTap: (){
-                           Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MyDischarge()));
-                        },//prescription
-                        child: Container(
-                          width:190,
-                          padding: EdgeInsets.symmetric(vertical: 12),
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 5, 117, 134),
-                            borderRadius:BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text("Discharge Summery",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-
+                    ],
+                  ),
+                  Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+    
+                    
+                        InkWell(
+                          onTap: (){
+                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      MyDischarge(
+                                                        id: apiList![index]
+                                                            .admissionId
+                                                            .toString(),
+                                                      )));
+                            // Navigator.push(
+             // context, MaterialPageRoute(builder: (context) => MyDischarge()));
+                          },//prescription
+                          child: Container(
+                            width:190,
+                            padding: EdgeInsets.symmetric(vertical: 12),
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 5, 117, 134),
+                              borderRadius:BorderRadius.circular(10),
                               ),
-                              //{double? height}
-
+                              child: Center(
+                                child: Text("Discharge Summery",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+    
+                                ),
+                                //{double? height}
+    
+                              ),
+                              ),
+    
                             ),
                             ),
-
-                          ),
-                          ),
-                        
+                          
+                  ],
+                  ),
+                  SizedBox(height: 16,)
+                  
+                     
+                    
+                    ],
+                  ),
+    
+                ),
+                  ),
+    
+    
                 ],
-                ),
-                SizedBox(height: 16,)
-                
-                   
-                  
-                  ],
-                ),
-
               ),
-                ),
-
-
-              ],
-            ),
-
-          );
-
-        } ),
+    
+            );
+    
+          } ),
+      ),
     );
   }
   Future<void> getApiData() async{
@@ -256,6 +280,14 @@ class _MyVisitListDischargeSummeryState extends State<MyVisitListDischargeSummer
     var result= await http.get(Uri.parse(url));
     print(result.statusCode);
     print(result.body);
-    apiList=jsonDecode(result.body).map((item) => Dischargesummerylist.fromJson(item)).toList().cast<Dischargesummerylist>();
+    if (result.statusCode == 200) {
+      setState(() {
+        isLoading = false;
+      });
+       log(result.body);
+        apiList=jsonDecode(result.body).map((item) => Dischargesummerylist.fromJson(item)).toList().cast<Dischargesummerylist>();
+ 
+    }
+    //apiList=jsonDecode(result.body).map((item) => Dischargesummerylist.fromJson(item)).toList().cast<Dischargesummerylist>();
   }
 }

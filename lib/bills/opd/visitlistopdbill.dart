@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -55,6 +57,8 @@ class MyVisitlistOpdBill extends StatefulWidget {
 
 class _MyVisitlistOpdBillState extends State<MyVisitlistOpdBill> {
   List<Visitmodel>? apiList;
+   bool isLoading = true;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -67,7 +71,12 @@ class _MyVisitlistOpdBillState extends State<MyVisitlistOpdBill> {
     return Scaffold(
       appBar: AppBar(title: Text("Bill"),
       backgroundColor: Color.fromARGB(255, 5, 117, 134),),
-      body: SingleChildScrollView(
+      body:isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+
+       :SingleChildScrollView(
         child: Container(
           
           color: Colors.white,
@@ -105,7 +114,7 @@ class _MyVisitlistOpdBillState extends State<MyVisitlistOpdBill> {
                                 fontWeight: FontWeight.bold,
                               ),
                               ),
-                              subtitle: Text('Admission ID: '+'${apiList![index].visitId}'),
+                              subtitle: Text('Visit ID: '+'${apiList![index].visitId}'),
                               trailing: CircleAvatar(
                                 radius: 25,
                                 backgroundImage: AssetImage("assets/doctor.png"),
@@ -196,8 +205,17 @@ class _MyVisitlistOpdBillState extends State<MyVisitlistOpdBill> {
                       
                           InkWell(
                             onTap: (){
-                               Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MyOpdBillList()));
+                              Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      MyOpdBillList(
+                                                        id: apiList![index]
+                                                            .visitId
+                                                            .toString(),
+                                                      )));
+                             //  Navigator.push(
+                //context, MaterialPageRoute(builder: (context) => MyOpdBillList()));
                             },//prescription
                             child: Container(
                               width:190,
@@ -250,6 +268,14 @@ class _MyVisitlistOpdBillState extends State<MyVisitlistOpdBill> {
     var result= await http.get(Uri.parse(url));
     print(result.statusCode);
     print(result.body);
-    apiList=jsonDecode(result.body).map((item) => Visitmodel.fromJson(item)).toList().cast<Visitmodel>();
+    if (result.statusCode == 200) {
+      setState(() {
+        isLoading = false;
+      });
+      log(result.body);
+      apiList=jsonDecode(result.body).map((item) => Visitmodel.fromJson(item)).toList().cast<Visitmodel>();
+  
+    }
+    //apiList=jsonDecode(result.body).map((item) => Visitmodel.fromJson(item)).toList().cast<Visitmodel>();
   }
 }

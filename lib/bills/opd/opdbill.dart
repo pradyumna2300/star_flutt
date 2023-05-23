@@ -2,6 +2,8 @@
 
 //import 'dart:convert';
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -34,12 +36,13 @@ class Billopdmodel {
   String serviceName;
   String departmentName;
   String pBillNo;
-  String chargesDoctorName;
+  //String chargesDoctorName;
   double chargesTotalAmount;
   double totalBillAmount;
   double concessionAmt;
   double netPayableAmt;
   String cashCounterName;
+  String consultantDocName;
 
 
   Billopdmodel(
@@ -55,12 +58,13 @@ class Billopdmodel {
       required this.serviceName,
       required this.departmentName,
       required this.pBillNo,
-      required this.chargesDoctorName,
+      //required this.chargesDoctorName,
       required this.chargesTotalAmount,
       required this.totalBillAmount,
       required this.concessionAmt,
       required this.netPayableAmt,
       required this.cashCounterName,
+       required this.consultantDocName,
       });
 
   factory Billopdmodel.fromJson(Map<String, dynamic> json) => Billopdmodel(
@@ -77,12 +81,13 @@ class Billopdmodel {
         serviceName: json["ServiceName"],
         departmentName: json["DepartmentName"],
         pBillNo: json["PBillNo"],
-        chargesDoctorName: json["ChargesDoctorName"],
+       // chargesDoctorName: json["ChargesDoctorName"],
         chargesTotalAmount: json["ChargesTotalAmount"],
         totalBillAmount: json["TotalBillAmount"],
         concessionAmt: json["ConcessionAmt"],
         netPayableAmt: json["NetPayableAmt"],
         cashCounterName: json["CashCounterName"],
+         consultantDocName: json["ConsultantDocName"],
        
       );
 
@@ -100,19 +105,22 @@ class Billopdmodel {
         "ServiceName": serviceName,
         "DepartmentName": departmentName,
         "PBillNo": pBillNo,
-        "ChargesDoctorName": chargesDoctorName,
+       // "ChargesDoctorName": chargesDoctorName,
         "ChargesTotalAmount": chargesTotalAmount,
         "TotalBillAmount": totalBillAmount,
        "ConcessionAmt": concessionAmt,
         "NetPayableAmt": netPayableAmt,
         "CashCounterName": cashCounterName,
+        "ConsultantDocName": consultantDocName,
         
         
       };
 }
 
 class MyOpdBill extends StatefulWidget {
-  const MyOpdBill({super.key});
+  
+  final String id;
+  const MyOpdBill({super.key,required this.id});
 
   @override
   State<MyOpdBill> createState() => _MyOpdBillState();
@@ -120,6 +128,7 @@ class MyOpdBill extends StatefulWidget {
 
 class _MyOpdBillState extends State<MyOpdBill> {
   List<Billopdmodel>? apiList;
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -135,7 +144,11 @@ class _MyOpdBillState extends State<MyOpdBill> {
         title: Text("BILL"),
         backgroundColor: Color.fromARGB(255, 5, 117, 134),
       ),
-      body: SingleChildScrollView(
+      body: isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+        : SingleChildScrollView(
         child: SafeArea(
           child: Column(
             children: [
@@ -292,7 +305,7 @@ class _MyOpdBillState extends State<MyOpdBill> {
                                   EdgeInsets.only(left: 15, top: 10, bottom: 5),
                               child: Text(
                                 "Doctor Name : " +
-                                    "${apiList![index].chargesDoctorName}",
+                                    "${apiList![index].consultantDocName}",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
@@ -635,14 +648,25 @@ class _MyOpdBillState extends State<MyOpdBill> {
   }
 
   Future<void> getApiData() async {
-    String url = "http://mobileapis.clinosys.com/api/Bill?billNo=3&opIpType=0";
+    String url = "http://mobileapis.clinosys.com/api/Bill?billNo=${widget.id}&opIpType=0";//3
     var result = await http.get(Uri.parse(url));
     print(result.statusCode);
     print(result.body);
-
-    apiList = jsonDecode(result.body)
+    if (result.statusCode == 200) {
+      setState(() {
+        isLoading = false;
+      });
+      log(result.body);
+      apiList = jsonDecode(result.body)
         .map((item) => Billopdmodel.fromJson(item))
         .toList()
         .cast<Billopdmodel>();
   }
-}
+    }
+
+   /* apiList = jsonDecode(result.body)
+        .map((item) => Billopdmodel.fromJson(item))
+        .toList()
+        .cast<Billopdmodel>();*/
+  }
+
