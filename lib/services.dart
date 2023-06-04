@@ -103,8 +103,9 @@ class _MyServicesState extends State<MyServices> {
                           width: double.infinity,
                           height: 240,
                           fit: BoxFit.cover,
-                          image: const NetworkImage(//${apiList![index].image}
-                              'https://www.nanavatimaxhospital.org/controlpanel/uploadedfiles/gallery/1570613870_Different_Types_Of_Radiology_Techniques_-_Nanavati_Hospital_564x533.jpg')),
+                          image:  NetworkImage(
+                          '${apiList![index].image}'
+                              )),
                        Text(
                         '${apiList![index].title}',
                         style:
